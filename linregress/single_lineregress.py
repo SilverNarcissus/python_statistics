@@ -4,7 +4,7 @@ import pylab
 from scipy.stats import f, t
 
 
-def liner_regeress_analyze(array_x, array_y, alpha = 0.05):
+def liner_regeress_analyze(array_x, array_y, alpha=0.05):
     ############################################
     #         calculate basic parameter        #
     ############################################
@@ -40,10 +40,10 @@ def liner_regeress_analyze(array_x, array_y, alpha = 0.05):
     #             return section               #
     ############################################
     if significance_very_high:
-        return slope, intercept, r_value, 2, interval
+        return slope, intercept, r_value, p_value, 2, interval
     if significance_high:
-        return slope, intercept, r_value, 1, interval
-    return slope, intercept, r_value, 0, interval
+        return slope, intercept, r_value, p_value, 1, interval
+    return slope, intercept, r_value, p_value, 0, interval
 
 
 x = [255.7, 263.3, 275.4, 278.3, 296.7, 309.4, 315.8, 318.8, 330.0, 340.2, 350.7, 367.3, 381.3, 406.5, 430.8, 451.5]

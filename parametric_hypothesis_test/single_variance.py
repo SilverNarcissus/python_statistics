@@ -16,7 +16,7 @@ class Solution:
         ka2 = freedom * (stand ** 2) / variance
         # two-tailed test
         # H0 means simple is significantly fluctuate than totality
-        conclusion = (ka2 > chi2.ppf(1 - alpha / 2, freedom)) | (ka2 > chi2.ppf(alpha / 2, freedom))
+        conclusion = (ka2 < chi2.ppf(1 - alpha / 2, freedom)) | (ka2 > chi2.ppf(alpha / 2, freedom))
         return [round(freedom, 2), round(ka2, 2), conclusion]
 
 
