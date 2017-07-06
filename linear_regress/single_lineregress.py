@@ -40,12 +40,14 @@ def liner_regeress_analyze(array_x, array_y, alpha=0.05):
     #             return section               #
     ############################################
     if significance_very_high:
-        return slope, intercept, r_value, p_value, 2, interval
+        return slope, intercept, r_value, p_value, "very high", interval
     if significance_high:
-        return slope, intercept, r_value, p_value, 1, interval
-    return slope, intercept, r_value, p_value, 0, interval
+        return slope, intercept, r_value, p_value, "high", interval
+    return slope, intercept, r_value, p_value, "no", interval
 
 
+# x means [x(row1), x(row2)...]
+# y means [y(row1), y(row2)...]
 x = [255.7, 263.3, 275.4, 278.3, 296.7, 309.4, 315.8, 318.8, 330.0, 340.2, 350.7, 367.3, 381.3, 406.5, 430.8, 451.5]
 y = [116.5, 120.8, 124.4, 125.5, 131.7, 136.2, 138.7, 140.2, 146.8, 149.6, 153.0, 158.2, 163.2, 170.5, 178.2, 185.9]
 print(liner_regeress_analyze(x, y))
