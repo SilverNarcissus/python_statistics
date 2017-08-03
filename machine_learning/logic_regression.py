@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn import datasets
 
-from mechine_learning.evaluator import classification_evaluator
+from machine_learning.evaluator import classification_evaluator
 
 iris = datasets.load_iris()
 X = iris.data
