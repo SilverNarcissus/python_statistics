@@ -4,6 +4,7 @@ from sklearn import datasets
 
 from machine_learning.evaluator import classification_evaluator
 
+# load data
 iris = datasets.load_iris()
 X = iris.data
 y = iris.target
@@ -15,6 +16,7 @@ X1 = np.append(X[25:50], X[75:100], axis=0)
 y = y[y != 2]
 y1 = np.append(y.take(s1), y.take(s2))
 
+# learning begin
 clf = LogisticRegression(C=1, penalty='l1', tol=1e-4)
 clf.fit(X1, y1)
 print(np.append(X[0:25], X[50:75], axis=0))

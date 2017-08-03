@@ -1,4 +1,4 @@
-import numpy as np
+from scipy import stats
 
 
 # predict_method: what you get in learning
@@ -53,4 +53,4 @@ def regression_evaluator(predict_method, data, target):
         data_temp = data[i].reshape(1, -1)
         error.append(predict_method(data_temp) - target[i])
 
-    return [np.mean(error), np.std(error), total_num]
+    return stats.describe(error)
