@@ -38,7 +38,7 @@ def liner_regeress_analyze(array_x, array_y, alpha=0.05):
     v_e = s_e / freedom_else
     F = v_r / v_e
 
-    residual_std_error = math.sqrt(v_e)
+    residual_std_error = math.sqrt(abs(v_e))
     interval = -t.ppf(alpha / 2, freedom_else) * residual_std_error
 
     r = math.sqrt(s_r / s_t)
@@ -70,9 +70,14 @@ def liner_regeress_analyze(array_x, array_y, alpha=0.05):
         return beta, r, "high", interval, significance_conclusion
     return beta, r, "no", interval, significance_conclusion
 
+
 # array_x means [[x1(row1), x2(row1)], [x1(row2), x2(row2)]...]
 # array_y means [y(row1), y(row2)...]
 array_x = [[274, 2450], [180, 3250], [375, 3802], [205, 2838], [86, 2347], [265, 3782], [98, 3008], [330, 2450],
            [195, 2137], [53, 2560], [430, 4020], [372, 4427], [236, 2660], [157, 2088], [370, 2605]]
 array_y = [162, 120, 223, 131, 67, 169, 81, 192, 116, 55, 252, 232, 144, 103, 212]
-print(liner_regeress_analyze(array_x, array_y))
+x = [[1, 1, 1], [2, 2, 3], [3, 3, 3], [4, 4, 5], [5, 4, 3], [6, 5, 4]]
+y = [1, 2, 3, 4, 5, 6]
+print(liner_regeress_analyze(x, y))
+
+# print(liner_regeress_analyze(array_x, array_y))

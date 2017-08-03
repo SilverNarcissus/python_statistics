@@ -51,6 +51,6 @@ def regression_evaluator(predict_method, data, target):
     error = []
     for i in range(total_num):
         data_temp = data[i].reshape(1, -1)
-        error.append(predict_method(data_temp) - target[i])
+        error.append(abs(predict_method(data_temp) - target[i]))
 
     return stats.describe(error)
