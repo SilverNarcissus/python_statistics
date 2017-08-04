@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn import datasets
 
-from machine_learning.evaluator import classification_evaluator
+from machine_learning.evaluator import bio_classification_evaluator
 
 # load data
 iris = datasets.load_iris()
@@ -20,4 +20,4 @@ y1 = np.append(y.take(s1), y.take(s2))
 clf = LogisticRegression(C=1, penalty='l1', tol=1e-4)
 clf.fit(X1, y1)
 print(np.append(X[0:25], X[50:75], axis=0))
-print(classification_evaluator(clf.predict, np.append(X[0:25], X[50:75], axis=0), np.append(y[0:25], y[50:75], axis=0)))
+print(bio_classification_evaluator(clf.predict, np.append(X[0:25], X[50:75], axis=0), np.append(y[0:25], y[50:75], axis=0)))
