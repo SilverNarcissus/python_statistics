@@ -1,6 +1,10 @@
 from functools import reduce
 import numpy as np
 from scipy.stats import f, t, stats
+from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+
 from machine_learning.evaluator import regression_evaluator
 
 
@@ -48,7 +52,7 @@ class LineRegress:
         freedom_else = len(array_x) - 2
         freedom_total = freedom_regress + freedom_else
 
-        v_r = s_r/ freedom_regress
+        v_r = s_r / freedom_regress
         v_e = s_e / freedom_else
 
         # s_y
@@ -143,8 +147,17 @@ array_x = [[274, 2450], [180, 3250], [375, 3802], [205, 2838], [86, 2347], [265,
 array_y = [162, 120, 223, 131, 67, 169, 81, 192, 116, 55, 252, 232, 144, 103, 212]
 x = [255.7, 263.3, 275.4, 278.3, 296.7, 309.4, 315.8, 318.8, 330.0, 340.2, 350.7, 367.3, 381.3, 406.5, 430.8, 451.5]
 y = [116.5, 120.8, 124.4, 125.5, 131.7, 136.2, 138.7, 140.2, 146.8, 149.6, 153.0, 158.2, 163.2, 170.5, 178.2, 185.9]
-result = LineRegress.fit(array_x[:10], array_y[:10])
-print(regression_evaluator(result.predict, np.array(array_x[10:15]), np.array(array_y[10:15])))
+# result = LineRegress.fit(array_x, array_y)
+# print(regression_evaluator(result.predict, np.array(array_x[10:15]), np.array(array_y[10:15])))
+#
+# result = LineRegress.fit(x[:15], y[:15])
+# print(regression_evaluator(result.predict, np.array(x[14:16]), np.array(y[14:16])))
 
-result = LineRegress.fit(x[:15], y[:15])
-print(regression_evaluator(result.predict, np.array(x[14:16]), np.array(y[14:16])))
+result = SVR(C=1, kernel="linear")
+result.fit(array_x, array_y)
+# scores = stats.describe(cross_val_score(result, array_x, array_y, cv=10))
+print(cross_val_score(result, array_x, array_y, cv=10, scoring="mean_absolute_error"))
+# print(result.predict([274, 2450]))
+
+result = LinearRegression()
+print(cross_val_score(result, array_x, array_y, cv=10, scoring="mean_absolute_error"))
