@@ -4,6 +4,7 @@ from scipy.stats import f, t, stats
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
+from sklearn.multioutput import MultiOutputRegressor
 
 from machine_learning.evaluator import regression_evaluator
 
@@ -154,10 +155,9 @@ y = [116.5, 120.8, 124.4, 125.5, 131.7, 136.2, 138.7, 140.2, 146.8, 149.6, 153.0
 # print(regression_evaluator(result.predict, np.array(x[14:16]), np.array(y[14:16])))
 
 result = SVR(C=1, kernel="linear")
-result.fit(array_x, array_y)
 # scores = stats.describe(cross_val_score(result, array_x, array_y, cv=10))
-print(cross_val_score(result, array_x, array_y, cv=10, scoring="mean_absolute_error"))
+print(stats.describe(cross_val_score(result, array_x, array_y, cv=10)))
 # print(result.predict([274, 2450]))
 
 result = LinearRegression()
-print(cross_val_score(result, array_x, array_y, cv=10, scoring="mean_absolute_error"))
+print(stats.describe(cross_val_score(result, array_x, array_y, cv=10)))

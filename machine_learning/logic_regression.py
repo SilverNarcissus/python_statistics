@@ -8,6 +8,7 @@ from sklearn.tree import DecisionTreeClassifier
 from scipy import stats
 from sklearn.svm import NuSVC
 from sklearn.cluster import KMeans
+from sklearn.metrics import fowlkes_mallows_score
 
 # load data
 iris = datasets.load_iris()
@@ -52,3 +53,4 @@ print(scores)
 
 kmeans = KMeans(n_clusters=3).fit(iris.data)
 print(kmeans.labels_)
+print(fowlkes_mallows_score(iris.target, kmeans.labels_))
