@@ -15,7 +15,7 @@ from sklearn.decomposition import DictionaryLearning
 from sklearn.pipeline import Pipeline
 
 iris = datasets.load_iris()
-# print(iris.data)
+print(iris.data)
 
 # pca = PCA(n_components=4)
 # X = pca.fit_transform(iris.data)
@@ -48,13 +48,20 @@ iris = datasets.load_iris()
 dl = DictionaryLearning(3, transform_algorithm='lars')
 pca = PCA(n_components=2)
 # X = pca.fit_transform(iris.data)
-X = dl.fit_transform(iris.data)
+X = pca.fit_transform(iris.data)
+print(pca.transform([5, 3, 1.4, 0.2]))
+print(iris.data[0])
 print(X)
 result = KNeighborsClassifier(n_neighbors=2, n_jobs=1)
+s = NuSVC()
+s.fit()
 
 scores = stats.describe(cross_val_score(result, X, iris.target, cv=10))
+result.fit(X, iris.target)
+print(result.predict(pca.transform([5, 3, 1.4, 0.1])))
 print(scores)
 
-final_estimator = Pipeline([('pca', pca), ('classifier', result)])
-scores = stats.describe(cross_val_score(final_estimator, iris.data, iris.target, cv=10))
-print(scores)
+# final_estimator = Pipeline([('pca', pca), ('classifier', result)])
+# scores = stats.describe(cross_val_score(final_estimator, iris.data, iris.target, cv=30))
+# print(scores)
+

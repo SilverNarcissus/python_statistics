@@ -20,3 +20,9 @@ method_d = [28.8, 28.0, 31.5, 25.9]
 method_e = [20.6, 21.2, 22.0, 21.2]
 
 print(solve((method_a, method_b, method_c, method_d, method_e)))
+
+a = [1, 2, 3, 4, 5]
+for i in a:
+    a.remove(i)
+    print(a)
+print(a)
