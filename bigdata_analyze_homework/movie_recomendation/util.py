@@ -55,6 +55,7 @@ def build_data_matrix_and_dump():
 
 
 # build movie matrix by title
+# for plus task
 def build_movie_matrix():
     model = Word2Vec.load("word2vec.model")
     size = 100

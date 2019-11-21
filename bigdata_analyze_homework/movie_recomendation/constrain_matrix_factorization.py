@@ -21,7 +21,7 @@ a_grid = [0.1, 0.05, 0.01, 0.005, 0.001]
 def train_and_eval(train, test, k, a, movie):
     # indicate which movie was scored
     A = train != 0
-    # initalize
+    # initialize
     U = np.random.normal(size=(user_num, k))
     V = np.random.normal(size=(movie_num, k))
 
@@ -33,10 +33,10 @@ def train_and_eval(train, test, k, a, movie):
     for i in range(5000):
         print('current iteration: ', i)
         M = A * (np.dot(U, V.T) - train)
-        U_gradi = M.dot(V) + 2 * a * U
-        V_gradi = M.T.dot(U) + 2 * a * V + 4 * a * (V.dot(V.T) - movie.dot(movie.T)).dot(V)
-        U = U - learning_rate * U_gradi
-        V = V - learning_rate * V_gradi
+        U_gradient = M.dot(V) + 2 * a * U
+        V_gradient = M.T.dot(U) + 2 * a * V + 4 * a * (V.dot(V.T) - movie.dot(movie.T)).dot(V)
+        U = U - learning_rate * U_gradient
+        V = V - learning_rate * V_gradient
 
         J = (np.linalg.norm(A * (train - np.dot(U, V.T))) ** 2) / 2 + \
             a * (np.linalg.norm(U) ** 2) + a * (np.linalg.norm(V) ** 2) +\

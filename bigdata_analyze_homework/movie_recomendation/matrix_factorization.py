@@ -14,14 +14,16 @@ user_num = 10000
 movie_num = 10000
 
 # grid search method
-k_grid = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-a_grid = [0.1, 0.05, 0.01, 0.005, 0.001]
+# k_grid = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+# a_grid = [0.1, 0.05, 0.01, 0.005, 0.001]
+k_grid = [5, 7, 9, 11, 13, 15]
+a_grid = [0.008, 0.005, 0.003, 0.001]
 
 
 def train_and_eval(train, test, k, a):
     # indicate which movie was scored
     A = train != 0
-    # initalize
+    # initialize
     U = np.random.normal(size=(user_num, k))
     V = np.random.normal(size=(movie_num, k))
 
@@ -33,10 +35,10 @@ def train_and_eval(train, test, k, a):
     for i in range(2000):
         print('current iteration: ', i, ' current k: ', k, 'current a: ', a)
         M = A * (np.dot(U, V.T) - train)
-        U_gradi = M.dot(V) + 2 * a * U
-        V_gradi = M.T.dot(U) + 2 * a * V
-        U = U - learning_rate * U_gradi
-        V = V - learning_rate * V_gradi
+        U_gradient = M.dot(V) + 2 * a * U
+        V_gradient = M.T.dot(U) + 2 * a * V
+        U = U - learning_rate * U_gradient
+        V = V - learning_rate * V_gradient
 
         J = (np.linalg.norm(A * (train - np.dot(U, V.T))) ** 2) / 2 + \
             a * (np.linalg.norm(U) ** 2) + a * (np.linalg.norm(V) ** 2)
@@ -86,7 +88,7 @@ def q1():
 
 def q2():
     train, test = generate_data()
-    with open('result.txt', 'w', encoding='utf-8') as result:
+    with open('result2.txt', 'w', encoding='utf-8') as result:
         for k in k_grid:
             for a in a_grid:
                 j_list, rmse_list, count = train_and_eval(train, test, k, a)
